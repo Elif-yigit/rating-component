@@ -1,39 +1,86 @@
-const sayilar = [1,  2, 3, 4, 5];
+/** 
+ değişkenleri tanımla 
 
-const imageSrc="assets/,mg/star.png";
+butonlara click event ata
+(her butonun içinde dönmek gerekiyor)
+bunun için for döngüsü oluştur
+seçilen sayıyı belirle
+bu seçilen sayı butonuna tıklandığında gözükmesiiçin submit butonuna click event ata 
+seçilen sayı diğer sayfa da gözükmsi için html'de bulunan container divinin değişkenini tanımla
+sonucu yazdırmak için koşul oluşrmak gerekiyor çünkü
+5 üzerinden değerlendirme yapacak
+sonuçta değişen sayfayı innerHtml ile yazdır.
 
-const list = document.querySelector('.list');
-const btns =document.querySelector('.btns');
-const mesaj = document.querySelector('.mesaj');
+her butonun aynı anda seçilmemesi için if döngüsü kullanmalısın yani koşul belirtmen gerekiyor
+bunun için onu seçtiğine dair bir sınıf oluşturmak lazım
+ama bu şekilde yapınca diğer butonlarda seçili kaldığı için remove eklememiz gerekiyor
+sonra  seçilen olduğunu göstermek için add ile ekle
 
-for(const sayi of sayilar) {
 
-  list.innerHTML += `<li>
-  <button class="btns" "yap(${sayi})">${sayi}
-  </button></li>`;
+
+
+*/
+
+
+const btns = document.querySelectorAll('.btn');
+const btnSubmit = document.querySelector('.btnSubmit');
+const container = document.querySelector('.container');
+const imageSrc ='assets/img/payment.svg';
+let secimSayi;
+
+
+for (const btn of btns ) {
+
+  // console.log(btn);
+  btn.addEventListener('click',secim);
+ 
 }
 
 
 
-function yap(secim) {
+function secim (){
 
+  // secim = this.innerText;
+//  console.log(this.innerText);
 
+for (const btn of btns) {
 
-mesaj.innerHTML += `
-
-<div class='image'>${Image}}</div>
-
-<div>You selected <span>${secim}</span> out of 5</div>
-<div>Thank you!</div>
-<div>We appreciate you taking the time to give a rating. If you ever need more support, don’t hesitate to get in touch!</div>
-
-`
-
-
+  if(btn.classList.contains('secilen')) {
+    btn.classList.remove('secilen');
+  }
+}
+this.classList.add('secilen');
+secimSayi = this.innerText;
 }
 
-// for(let i =0; i<btns; i++) {
 
-//   btns.addEventListener('click',yap);
+
+// function yazdir() {
+
+//   if(secimSayi <= 5 ) {
+
+//     container.innerHTML = `
+//     <div>You selected ${secimSayi} out of 5</div>
+//     <h2>Thank you!</h2>
+//     <p>We appreciate you taking the time to give a rating. If you ever need more support, don’t hesitate to get in touch!</p>
+//     `
+//   }
 // }
 
+// btnSubmit.addEventListener('click', yazdir);
+
+
+btnSubmit.addEventListener('click' , () => {
+
+if(secimSayi) {
+
+  container.innerHTML = `
+  <div class="image"><img src='assets/img/payment.svg' alt='payment'</div>
+    <div class='secim'>You selected ${secimSayi} out of 5</div>
+    <h2 class='header'>Thank you!</h2>
+    <span class='text'>We appreciate you taking the time to give a rating. If you ever need more support, don’t hesitate to get in touch!</span>
+    `
+}
+
+
+});
